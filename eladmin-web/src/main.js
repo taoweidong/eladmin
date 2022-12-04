@@ -32,6 +32,8 @@ Vue.use(Element, {
 })
 
 Vue.config.productionTip = false
+// 去掉控制台vue warning告警问题
+Vue.config.silent = true
 
 new Vue({
   el: '#app',

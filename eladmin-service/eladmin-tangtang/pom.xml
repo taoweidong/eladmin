@@ -26,6 +26,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+
+        <!--   多数据配置     -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+
         <dependency>
             <groupId>me.zhengjie</groupId>
             <artifactId>eladmin-common</artifactId>

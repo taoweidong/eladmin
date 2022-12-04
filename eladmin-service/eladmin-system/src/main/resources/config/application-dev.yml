@@ -1,12 +1,33 @@
 #配置数据源
 spring:
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   datasource:
+    # 指定使用 Druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 动态数据源文档 https://www.kancloud.cn/tracy5546/dynamic-datasource/content
+    dynamic:
+      #设置默认的数据源或者数据源组,默认值即为 master
+      primary: master
+      datasource:
+        # 主库数据源
+        master:
+          driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+          url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+          username: ${DB_USER:root}
+          password: ${DB_PWD:root}
+        # 从库数据源
+        slave:
+          driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+          url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:test}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+          username: ${DB_USER:root}
+          password: ${DB_PWD:root}
     druid:
-      db-type: com.alibaba.druid.pool.DruidDataSource
-      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
-      username: ${DB_USER:root}
-      password: ${DB_PWD:root}
+      #      db-type: com.alibaba.druid.pool.DruidDataSource
+      #      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      #      url: jdbc:log4jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+      #      username: ${DB_USER:root}
+      #      password: ${DB_PWD:root}
       # 初始连接数
       initial-size: 5
       # 最小连接数
